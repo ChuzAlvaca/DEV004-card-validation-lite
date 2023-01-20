@@ -14,7 +14,12 @@
 <script lang="javascript">  
 function validate(){
   const arrOfDigits = Array.from(String((document.getElementById ("cardnumber").value)), Number);
+  if (arrOfDigits.length === 1) {
+    alert ('escribe un número de tarjeta válido');
+    return null;
+  }
   if (arrOfDigits.length === 0) {
+    alert ('escribe un número de tarjeta válido');
     return null;
   }
 console.log('Array Original:',arrOfDigits);
