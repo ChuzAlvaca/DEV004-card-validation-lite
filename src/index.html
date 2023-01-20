@@ -7,25 +7,66 @@
 </head>
 
 <body>
-  <input id="cardnumber"></input>
-  <button onclick="validate()">Validar</button>
+  <input id="cardnumber"  minlength="10"></input>
+  <button onclick="validate();">Validar</button> 
   <div id="result"></div>
-  <script lang="javascript">
-    function validate() {
-      const valid = isValid(document.getElementById("cardnumber").value)
-      if (valid) {
-        // Show success in div#result
-      }
-      else {
-        // Show error message in div#result
-      }
+  
+<script lang="javascript">  
+function validate(){
+  const arrOfDigits = Array.from(String((document.getElementById ("cardnumber").value)), Number);
+  if (arrOfDigits.length === 0) {
+    return null;
+  }
+console.log('Array Original:',arrOfDigits);
+arrOfDigits.reverse();
+console.log('Array invertido:',arrOfDigits);
+arrOfDigits.forEach(function(numero,index) {
+  //console.log(numero,index);
+  if (index %2 !== 0) {
+    j = numero*2;
+    //arrOfDigits[index] = j
+    if (j>=9){
+      substring = j.toString().split('').map(Number);
+      //console.log(substring);
+    
+      //variable de iniciacion, empieza en 0 y va a ir sumando los digitos del array
+      //suma los elementos de un array
+      k = 0
+        substring.forEach(function(numero2, _) {
+          k = k + numero2;
+        });
+      arrOfDigits[index] = k
+      console.log(k, "valor");
     }
+    else {
+      arrOfDigits[index] = j;
+    }
+  }
+});
 
-    function isValid(creditCardNumber){
-      // is creditCardNumber valid?
-      return false
-    }
-  </script>
+console.log ('Array final:',arrOfDigits);
+
+k = 0
+arrOfDigits.forEach(function(numero, _) {
+  k = k + numero;
+});
+
+console.log('Numero final:', k);
+console.log('modulo 10 de',k, '=', k % 10);
+if (k % 10 == 0) {
+  var resultado=('Tarjeta Válida');
+  console.log(resultado);
+  document.getElementById('result').innerHTML = resultado;
+}
+else {
+  var resultado=('Tarjeta Inválida!');
+  console.log(resultado);
+  document.getElementById('result').innerHTML = resultado;
+}
+}
+
+
+</script>
 </body>
 
 </html>
